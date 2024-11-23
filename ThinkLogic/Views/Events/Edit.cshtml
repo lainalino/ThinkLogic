@@ -1,0 +1,65 @@
+﻿@model ThinkLogic.Domain.Entities.Event
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Event</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Edit Event</h1>
+
+        <form asp-action="Edit" method="post">
+            <input type="hidden" asp-for="Id" /> <!-- Hidden field for the event ID -->
+
+            <div class="mb-3">
+                <label for="Title" class="form-label">Title</label>
+                <input type="text" id="Title" class="form-control" asp-for="Title" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label for="Location" class="form-label">Location</label>
+                <input type="text" id="Location" class="form-control" asp-for="Location" />
+                <span asp-validation-for="Location" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label for="StartDate" class="form-label">Start Date</label>
+                <input type="datetime-local" id="StartDate" class="form-control" asp-for="StartDate" />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label for="EndDate" class="form-label">End Date</label>
+                <input type="datetime-local" id="EndDate" class="form-control" asp-for="EndDate" />
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label for="Description" class="form-label">Description</label>
+                <textarea id="Description" class="form-control" asp-for="Description"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <a href="@Url.Action("Index", "Events")" class="btn btn-secondary">Back to Events</a>
+            </div>
+
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <div class="alert alert-danger">
+                    @error.ErrorMessage
+                </div>
+            }
+        </form>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

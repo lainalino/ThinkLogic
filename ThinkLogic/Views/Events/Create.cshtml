@@ -1,0 +1,69 @@
+﻿@model ThinkLogic.Domain.Entities.Event
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Event</title>
+
+    <!-- Link to Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+</head>
+<body>
+
+    <!-- Container for centering the content -->
+    <div class="container mt-5">
+        <h1 class="text-center">Create New Event</h1>
+
+        <!-- Form for creating event -->
+        <form asp-action="Create" method="post">
+            <div class="mb-3">
+                <label for="Title" class="form-label">Title</label>
+                <input type="text" class="form-control" id="Title" name="Title" value="@Model.Title" required />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label for="Location" class="form-label">Location</label>
+                <input type="text" class="form-control" id="Location" name="Location" value="@Model.Location" required />
+                <span asp-validation-for="Location" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label for="StartDate" class="form-label">Start Date</label>
+                <input type="datetime-local" class="form-control" id="StartDate" name="StartDate" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" 
+                     required />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label for="EndDate" class="form-label">End Date</label>
+                <input type="datetime-local" class="form-control" id="EndDate" name="EndDate" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" required />
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label for="Description" class="form-label">Description</label>
+                <textarea class="form-control" id="Description" name="Description" rows="4" required>@Model.Description</textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-primary">Create Event</button>
+                <a href="@Url.Action("Index", "Events")" class="btn btn-secondary">Back to Events</a>
+            </div>
+
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <div class="alert alert-danger">
+                    @error.ErrorMessage
+                </div>
+            }
+        </form>
+    </div>
+
+    <!-- Link to Bootstrap JS (optional, for responsive behavior and other features) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
